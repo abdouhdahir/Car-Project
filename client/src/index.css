@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hero .ant-tabs-tab-btn{
+    color: white;
+}
+.group-carousel-ant .slick-arrow {
+    background-color: #fff;
+    color: black;
+    padding: 1px 1px 1px 1px;
+    
+}
+
+.ant-collapse {
+    background: transparent;
+    border: none;
+  }
+  .ant-collapse-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ant-collapse-arrow {
+    margin-left: auto; 
+  }
+  .ant-collapse-header-text{
+    display: flex;
+    font-weight: 500;
+  }
+  .hero .leaflet-bottom {
+    bottom: 0;
+    display: none;
+  }
+  :where(.css-dev-only-do-not-override-14i19y2).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    border: none;
+  }
+  :where(.css-dev-only-do-not-override-14i19y2).ant-pagination .ant-pagination-item-active {
+    font-weight: 600;
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+  }
+  :where(.css-dev-only-do-not-override-14i19y2).ant-pagination .ant-pagination-item-active:hover a {
+    color: #fff;
+  }
+  :where(.css-dev-only-do-not-override-14i19y2).ant-pagination .ant-pagination-item-active:hover{
+    border: 1px solid black;
+  }
+  :where(.css-dev-only-do-not-override-14i19y2).ant-pagination .ant-pagination-item-active {
+    border: 1px solid black;
+  }
+  :where(.css-dev-only-do-not-override-14i19y2).ant-pagination .ant-pagination-item:not(.ant-pagination-item-active):hover {
+    transition: all 0.2s;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+}
+:where(.css-dev-only-do-not-override-14i19y2).ant-pagination .ant-pagination-item-active a{
+  color: #fff;
+}
