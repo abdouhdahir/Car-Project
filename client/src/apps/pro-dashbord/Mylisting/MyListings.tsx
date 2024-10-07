@@ -36,6 +36,7 @@ interface CarListing {
 const MyListings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [visible, setVisible] = useState(false);
+  const [infoVisible, setInfoVisible] = useState(false);
   const [selectedCar, setSelectedCar] = useState<CarListing | null>(null);
   const { loading, error, data } = useQuery(GET_ALL_CARS);
   const [updateCarApi] = useMutation(UPTADE_CAR);
@@ -58,6 +59,9 @@ const MyListings = () => {
     gear: car.gear,
     price: car.price,
   }));
+  const pageSize = 4;
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentCars = carsData.slice(startIndex, startIndex + pageSize);
 
   const columns = [
     {
@@ -113,7 +117,11 @@ const MyListings = () => {
             size="small"
             onClick={() => deleteCar(record.id)}
           />
-          <Button icon={<EllipsisOutlined />} size="small" />
+          <Button
+            icon={<EllipsisOutlined />}
+            size="small"
+            onClick={() => handleViewDetails(record)}
+          />
         </div>
       ),
     },
@@ -123,9 +131,17 @@ const MyListings = () => {
     setSelectedCar(car);
     setVisible(true);
   };
+  const handleViewDetails = (car: CarListing) => {
+    setSelectedCar(car);
+    setInfoVisible(true);
+  };
 
   const onClose = () => {
     setVisible(false);
+    setSelectedCar(null);
+  };
+  const closeInfoDrawer = () => {
+    setInfoVisible(false);
     setSelectedCar(null);
   };
   const deleteCar = (id: string) => {
@@ -170,7 +186,7 @@ const MyListings = () => {
 
           <Table
             columns={columns}
-            dataSource={carsData}
+            dataSource={currentCars}
             pagination={false}
             rowKey="key"
           />
@@ -179,8 +195,8 @@ const MyListings = () => {
             <Pagination
               current={currentPage}
               onChange={(page) => setCurrentPage(page)}
-              total={50}
-              pageSize={10}
+              total={carsData.length}
+              pageSize={2}
             />
             <span className="text-gray-600">Showing results 1 to 3 of 3</span>
           </div>
@@ -272,6 +288,36 @@ const MyListings = () => {
               </Button>
             </Form.Item>
           </Form>
+        )}
+      </Drawer>
+      <Drawer
+        title="Car Details"
+        placement="right"
+        closable={false}
+        onClose={closeInfoDrawer}
+        visible={infoVisible}
+      >
+        {selectedCar && (
+          <div className="flex flex-col gap-10 text-xl">
+            <p>
+              <strong>Title:</strong> {selectedCar.title}
+            </p>
+            <p>
+              <strong>Description:</strong> {selectedCar.desc}
+            </p>
+            <p>
+              <strong>Kilometers:</strong> {selectedCar.kilo}
+            </p>
+            <p>
+              <strong>Fuel Type:</strong> {selectedCar.carburant}
+            </p>
+            <p>
+              <strong>Transmission:</strong> {selectedCar.gear}
+            </p>
+            <p>
+              <strong>Price:</strong> {selectedCar.price} DJF
+            </p>
+          </div>
         )}
       </Drawer>
     </div>

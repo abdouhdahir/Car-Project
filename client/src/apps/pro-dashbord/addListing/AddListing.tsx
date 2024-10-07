@@ -18,8 +18,8 @@ const AddListing = () => {
           onFinish={(values) => {
             addCarApi({
               variables: {
-                isreduckilo: values.isreduckilo,
-                isreducprice: values.isreducprice,
+                isreduckilo: values.isreduckilo === "oui",
+                isreducprice: values.isreducprice === "oui",
                 title: values.title,
                 desc: values.desc,
                 kilo: parseInt(values.kilo, 10),
@@ -29,10 +29,10 @@ const AddListing = () => {
               },
             })
               .then(() => {
-                message.success("Voiture ajoutée avec succès");
+                message.success("Car ajouté avec succès");
               })
               .catch(() => {
-                message.error("Erreur lors de l'ajout de la voiture");
+                message.error("Erreur lors de l'ajout du car");
               });
           }}
         >
